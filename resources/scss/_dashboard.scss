@@ -1,0 +1,82 @@
+.dashboard-menu {
+    li {
+        @apply text-[1.05rem] text-neutral-500 hover:text-[#111827];
+        
+        a {
+            @apply relative;
+        }
+    }
+    svg {
+        fill: #6B7280 !important;
+    }
+    li:hover svg {
+        fill: #111827 !important;
+    }
+    li:hover a {
+        @apply pl-5 transition;
+    }
+}
+
+.dashboard-card {
+    @apply rounded-md shadow-lg bg-white p-5;
+    .title {
+        @apply text-3xl font-bold text-[#140F4B];
+    }
+    .subtitle {
+        @apply text-[1.0rem] text-[#6B7280];
+    }
+}
+
+.table {
+    @apply border border-neutral-500/10 rounded-lg bg-white shadow-sm;
+    thead {
+        @apply text-[1.05rem] text-white bg-[#140F4B];
+    }
+    .table-link {
+        @apply text-[#1010EB] hover:text-[#140F4B] hover:underline transition-all;
+    }
+}
+
+.table_dropdown_items {
+    li {
+        a {
+            @apply text-[.8rem] text-[#6B7280] hover:text-[#111827];
+        }
+    }
+    svg {
+        fill: #6B7280 !important;
+        @apply h-[.8rem] w-[.8rem];
+    }
+    li:hover svg {
+        fill: #111827 !important;
+    }
+}
+.status_dropdown_items {
+    li {
+        a {
+            @apply text-[.8rem];
+        }
+    }
+    svg {
+        @apply h-[.8rem] w-[.8rem];
+    }
+    .icon-approval {
+        fill: #09c509 !important;
+    }
+    .icon-suspend {
+        fill: #d41414 !important;
+    }
+}
+
+.text-email {
+    max-width: 80px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-text {
+    @apply text-[.85rem] text-[#51545c] mt-4;
+}

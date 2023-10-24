@@ -1,0 +1,54 @@
+.bg-register {
+    @apply bg-[#1A1449] text-white;
+}
+
+.register-container {
+    @apply max-w-md mx-auto py-5 px-8;
+}
+
+.form-user-register {
+    @apply w-full block;
+    input[type="text"], input[type="email"], input[type="password"], select {
+        @apply rounded-full py-1 px-4 w-full border border-gray-300 text-[#1A1449] block;
+    }
+    // select {
+    //     @apply block rounded-full py-1 px-4 w-full border border-gray-300 text-[#1A1449];
+    // }
+    .btn-submit {
+        @apply bg-white text-[#1A1449] py-1.5 text-center min-w-[180px] hover:bg-[#F2F2F2] hover:text-[#1A1449];
+        @apply font-bold;
+        @apply relative hover:rounded-lg transition-all;
+    }
+    /* Style the unchecked checkbox */
+    input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #3498db; /* Blue border color */
+        background-color: white; /* White background color */
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    /* Style the checked checkbox */
+    input[type="checkbox"]:checked {
+        background-color: #3498db; /* Blue background color when checked */
+        border-color: #3498db; /* Blue border color when checked */
+    }
+
+    /* Style the checkbox icon (using a pseudo-element) */
+    input[type="checkbox"]::before {
+        content: '\2713'; /* Unicode check mark character */
+        font-size: 14px;
+        color: white; /* White icon color */
+        display: block;
+        text-align: center;
+        line-height: 18px;
+    }
+    .icon-consent {
+        @apply w-5 h-5;
+    }
+}
