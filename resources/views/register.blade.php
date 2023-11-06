@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Medtronic ConNEXT') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="bg-register min-h-screen">
+    <body class="bg-register min-h-screen hidden">
         <header class="bg-white text-[#1A1449] py-5">
             <div class="text-center">
                 <img width="200" src="{{ asset('img/LOGO-TEXT.png') }}" class="mx-auto max-w-full h-auto" alt="medtronic" loading="lazy" />
@@ -43,11 +43,11 @@
         
                 <form action="{{ route('user_registers.store') }}" class="form-user-register" method="POST">
                     @csrf
-                    <div class="mb-3">
+                    <div class="mb-3 hidden">
                         <label for="line_img" class="form-label">Line Image</label>
                         <input type="text" class="form-control" id="line_img" name="line_img" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 hidden">
                         <label for="line_token" class="form-label">Line Token</label>
                         <input type="text" class="form-control" id="line_token" name="line_token" required>
                     </div>
@@ -78,6 +78,10 @@
                                 <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="specialty_idsssss" class="form-label">Interest สาขาที่สนใจ*</label>
+                        มี remark ให้เขาติ๊กได้ด้วย เป็น input checkbox ให้ user ติ๊ก
                     </div>
                     <div class="mb-3">
                         <label for="license_number" class="form-label">เลขที่ใบประกอบวิชาชีพ*</label>
@@ -113,7 +117,7 @@
             </div>
         </div>
         
-
+        <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
         <script>
             // Function to get URL parameters
             function getParameterByName(name, url) {
@@ -135,6 +139,68 @@
                 document.getElementById('agent').value = agentValue || '';
                 document.getElementById('event').value = eventValue || '';
             });
+        </script>
+
+
+        <!-- START LIFF -->
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+        <script>
+            function initializeLiff(myLiffId) {
+            return liff
+                .init({
+                    liffId: myLiffId
+                })
+                .then(() => {
+                    // start to use LIFF's api
+                    //initializeApp();
+
+                    if (!liff.isLoggedIn()) {
+                        liff.login({ redirectUri: window.location.href });
+                    }
+                    else {
+                        const idToken = liff.getDecodedIDToken();
+                        // console.log(idToken); // print raw idToken object
+                        const lineImage = idToken.picture;
+                        const lineToken = idToken.sub;
+                        document.getElementById('line_img').value = lineImage || '';
+                        document.getElementById('line_token').value = lineToken || '';
+
+                        checkRegistration(lineToken);
+                    }
+
+                })
+                .catch((err) => {
+                    console.log('err');
+                });
+            }
+            initializeLiff("{{ env('LINE_LIFF_ID') }}");
+
+            // function เพื่อตรวจสอบการสมัคร
+            function checkRegistration( lineUserId ) {
+                $.ajax({
+                    url: '/check-registration',
+                    type: 'GET',
+                    data: { line_token: lineUserId },
+                    success: function (response) {
+                        if (response.registered) {
+                            // ถ้าเคยสมัครแล้ว 
+                            setTimeout(() => { 
+                                liff.closeWindow();
+                                history.back();
+                                window.stop();
+                                // alert('You have already registered');
+                            }, 200)
+                        } else {
+                            // ถ้ายังไม่ได้สมัคร
+                            // body remove className = hidden
+                            document.body.classList.remove('hidden');
+                        }
+                    },
+                    error: function () {
+                        console.log('Error checking registration');
+                    }
+                });
+            }
         </script>
 
         @livewireScripts

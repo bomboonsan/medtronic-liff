@@ -1,0 +1,14 @@
+.event-page {
+    
+    .article-container {
+        @apply bg-white min-h-[95vh] rounded-xl pb-4 overflow-hidden;
+        box-shadow: 3px 10px 50px rgba(0,0,0,0.1);
+        h1 {
+            @apply text-2xl text-[#140F4B] font-bold text-center;
+        }
+        
+    }
+    .article-body {
+        @apply w-full mx-auto md:w-[80%] px-4 text-[.95rem] font-[400] text-[#140F4B];
+    }
+}

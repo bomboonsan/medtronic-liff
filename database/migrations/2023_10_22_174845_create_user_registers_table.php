@@ -14,18 +14,19 @@ return new class extends Migration
         Schema::create('user_registers', function (Blueprint $table) {
             $table->id();
             $table->string('line_token');
-            $table->string('line_img');
+            $table->string('line_img')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->foreignId('career_id')->constrained('careers');
             $table->foreignId('specialty_id')->constrained('specialties');
-            $table->string('license_number');
+            $table->string('license_number')->nullable();
             $table->string('email')->unique();
-            $table->string('telephone')->unique();
-            $table->boolean('consented');
-            $table->string('agent');
-            $table->string('event');
-            $table->string('status');
+            $table->string('telephone')->unique()->nullable();
+            $table->boolean('consented')->nullable();
+            $table->string('agent')->nullable();
+            $table->string('register_event')->nullable();
+            $table->string('status')->default('pending');
+            $table->string('event')->nullable();
             $table->timestamps();
         });
     }

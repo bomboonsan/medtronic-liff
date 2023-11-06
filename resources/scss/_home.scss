@@ -1,0 +1,31 @@
+.body-home {
+    @apply bg-slate-200;
+}
+.home-container {
+    @apply max-w-md mx-auto bg-[#e6e6e6] min-h-screen;
+}
+
+.home-card {
+    @apply p-3 bg-white rounded-lg shadow-lg mb-4;
+    .row {
+        @apply flex flex-wrap items-center;
+    }
+    .col-left {
+        @apply basis-[30%] w-[30%];
+        .link-name {
+            @apply border-l-4 border-l-[#171ad7] pl-3 min-h-[40px];
+            a {
+                @apply text-[#14104a] text-[.95rem] font-bold leading-4;
+            }
+        }
+    }
+    .col-right {
+        @apply basis-[70%] w-[70%] text-black leading-5 pl-4;
+        .title {
+            @apply text-[#171ad7] font-medium text-[.85rem];
+        }
+        .des {
+            @apply text-[.7rem]
+        }
+    }
+}

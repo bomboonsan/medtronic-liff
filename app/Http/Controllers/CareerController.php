@@ -35,7 +35,7 @@ class CareerController extends Controller
     {
         // Fetch users with the given career_id
         $career = Career::find($id);
-        $users = UserRegister::where('career_id', $career->id)->get();
+        $users = UserRegister::where('career_id', $career->id)->paginate(20);
         
         return view('dashboard.careers.show', compact('career', 'users'));
     }
@@ -53,13 +53,17 @@ class CareerController extends Controller
 
         $career->update($request->all());
 
-        return redirect()->route('careers.index')->with('success', 'Career updated successfully!');
+        return redirect()->back()->with('success', 'Career updated successfully!');
     }
 
     public function destroy(Career $career)
     {
+
+        // ย้ายไปที่ Staff [ carreer_id = 3 ]
+        $career->userRegisters()->update(['career_id' => 3]);
+
         $career->delete();
 
-        return redirect()->route('careers.index')->with('success', 'Career deleted successfully!');
+        return redirect()->back()->with('success', 'Career deleted successfully!');
     }
 }

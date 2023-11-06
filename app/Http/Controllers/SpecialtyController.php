@@ -34,7 +34,7 @@ class SpecialtyController extends Controller
     public function show($id)
     {
         $specialty = Specialty::find($id);
-        $users = UserRegister::where('specialty_id', $specialty->id)->get();
+        $users = UserRegister::where('specialty_id', $specialty->id)->paginate(20);
 
         return view('dashboard.specialties.show', compact('specialty', 'users'));
     }

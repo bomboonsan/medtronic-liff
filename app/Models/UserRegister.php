@@ -10,6 +10,12 @@ class UserRegister extends Model
     use HasFactory;
     protected $escapeWhenCastingToString = false;
 
+    protected $casts = [
+        'agent' => 'string', // You can set the appropriate type
+        'register_event' => 'string',
+        'event' => 'string',
+    ];
+
     protected $fillable = [
         'line_token',
         'line_img',
@@ -21,8 +27,8 @@ class UserRegister extends Model
         'email',
         'telephone',
         'consented',
-        'agent',
-        'event',
+        // 'agent',
+        // 'register_event',
         'status',
     ];
 
